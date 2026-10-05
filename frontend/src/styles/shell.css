@@ -1,0 +1,225 @@
+/*
+ * App shell: the globe fills the window and the frame floats over it as liquid glass, so the
+ * header, the tool rail and the side bar tint and bend with what is behind them.
+ *   - Header across the top, rail down the left, side bar flush against the rail (an editor's
+ *     activity bar and side bar).
+ *   - The bottom dock (pass timeline over the clock) sits right of the side bar. A piece that
+ *     is not pinned is a round icon in the tray at its left end and pops up over the dock on
+ *     hover (`DockTray.vue`).
+ * `--dock-left`, `--dock-right` and `--right-edge` say what the sides occupy, for the dock
+ * and for the chips along the right edge.
+ */
+.soda-main {
+  height: 100dvh;
+}
+.stage {
+  --frame-top: 64px;
+  --rail-w: 64px;
+  --sidebar-w: 360px;
+  --dock-left: calc(var(--rail-w) + 14px);
+  --dock-right: 14px;
+  --right-edge: 14px;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background: #04070d;
+}
+.stage.has-left {
+  --dock-left: calc(var(--rail-w) + var(--sidebar-w) + 14px);
+}
+
+/* Frame ---------------------------------------------------------------------------- */
+.soda-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: var(--frame-top);
+  color: rgb(var(--v-theme-on-surface));
+}
+.soda-brand {
+  display: flex;
+  align-items: center;
+  padding-left: 18px;
+}
+.soda-brand img {
+  width: auto;
+  height: 48px;
+}
+.tool-rail {
+  position: absolute;
+  top: var(--frame-top);
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  width: var(--rail-w);
+  color: rgb(var(--v-theme-on-surface));
+}
+.tool-rail__list {
+  display: grid;
+  gap: 6px;
+  padding: 12px 10px;
+}
+.tool-link {
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  width: 44px;
+  padding: 8px 0 6px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(var(--v-theme-on-surface), 0.74);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 600;
+}
+.tool-link:hover {
+  background: rgba(var(--v-theme-primary), 0.1);
+}
+.tool-link.selected {
+  background: rgba(var(--v-theme-primary), 0.16);
+  color: rgb(var(--v-theme-primary));
+}
+.tool-link:focus-visible {
+  outline: 2px solid rgb(var(--v-theme-primary));
+  outline-offset: 2px;
+}
+/* The side bar: flush against the rail, full height, its cards read as sections. */
+.tool-sidebar {
+  position: absolute;
+  top: var(--frame-top);
+  bottom: 0;
+  left: var(--rail-w);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-w);
+  padding: 0 16px 8px;
+  /* Sections shrink and scroll their own bodies; the side bar itself never scrolls. */
+  overflow: hidden;
+}
+
+/*
+ * Cards keep their natural height; only a lone card, or the one marked `fill` (the long list
+ * in a panel), shrinks to what is left and scrolls its body. Shrinking every card would cut
+ * the short ones mid-field.
+ */
+.tool-sidebar > .dashboard-card {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+}
+.tool-sidebar > .dashboard-card:only-child,
+.tool-sidebar > .dashboard-card--fill {
+  flex: 0 1 auto;
+  min-height: 0;
+}
+.tool-sidebar > .dashboard-card > .card-heading {
+  flex-shrink: 0;
+}
+.tool-sidebar > .dashboard-card > .v-card-text {
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+/* A folded card is only its header row; the open ones share the height. */
+.tool-sidebar > .dashboard-card--folded {
+  flex: none;
+}
+/*
+ * Map credits: a glass capsule in the strip under the dock's right end, where neither side
+ * panel nor the timeline reaches (Cesium's default bottom-left spot sits under the side bar).
+ */
+/* Cesium's Viewer writes left/right/bottom inline on every resize, hence !important. */
+.stage .cesium-viewer-bottom {
+  left: auto !important;
+  right: var(--dock-right) !important;
+  bottom: 2px !important;
+  display: flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 9px 0 4px;
+  border-radius: 999px;
+  background: rgba(var(--v-theme-surface), var(--lg-alpha, 0.8));
+  backdrop-filter: var(--lg-fallback);
+  -webkit-backdrop-filter: var(--lg-fallback);
+  box-shadow: inset 0 1px 0 rgba(var(--v-theme-glass-edge), calc(var(--lg-rim) * 0.5));
+}
+.stage .cesium-viewer .cesium-widget-credits {
+  display: flex;
+  align-items: center;
+  color: rgb(var(--v-theme-on-surface));
+  font-size: 10px;
+  line-height: 1;
+  text-shadow: none;
+}
+.stage .cesium-widget-credits a,
+.stage .cesium-credit-expand-link {
+  color: inherit;
+}
+.stage .cesium-credit-logoContainer {
+  display: inline-flex !important;
+  align-items: center;
+}
+
+/* Bottom dock ------------------------------------------------------------------------ */
+.bottom-dock {
+  position: absolute;
+  right: var(--dock-right);
+  bottom: 22px;
+  left: var(--dock-left);
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: none;
+}
+.timeline-dock {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  container-type: inline-size;
+}
+.timeline-dock > *,
+.dock-tray > * {
+  pointer-events: auto;
+}
+.dock-tray {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+/* An unpinned piece popped up from its tray icon while hovered. */
+.dock-peek {
+  animation: dock-peek-in 140ms ease-out;
+}
+@keyframes dock-peek-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dock-peek {
+    animation: none;
+  }
+}
+
+/* A phone: the side bar covers the globe beside the rail and the dock stays under it. */
+@media (max-width: 760px) {
+  .stage.has-left {
+    --dock-left: calc(var(--rail-w) + 14px);
+    --sidebar-w: calc(100% - var(--rail-w));
+  }
+}
+/* Below the header, not over it. */
+.restore-snackbar .v-snackbar__wrapper {
+  margin-top: calc(var(--frame-top, 64px) + 8px);
+}

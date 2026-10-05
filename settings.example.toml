@@ -1,0 +1,31 @@
+# Copy to settings.local.toml (git-ignored) and adjust.
+
+# `soda serve` address. --bind/--port take precedence, then SODA_BIND/SODA_PORT.
+# bind = "127.0.0.1"
+# port = 1992
+
+# SQLite cache and downloaded ephemeris live here.
+data_dir = "data"
+
+# Storage backend. Empty means sqlite:///<data_dir>/soda.db. Only sqlite:/// is supported.
+# database_url = "sqlite:///data/soda.db"
+
+# Refresh these CelesTrak groups in the background, at most once per 2 hours each.
+auto_refresh = true
+refresh_groups = ["active"]
+
+# Import imagery files dropped into <data_dir>/imagery/inbox. Set to false to switch it off.
+imagery_inbox = true
+
+# List the read-only sample imagery of the `samples` git submodule, when it has been fetched
+# (git submodule update --init samples). Set to false to leave the samples out.
+imagery_samples = true
+
+# Vite dev server origins allowed by CORS.
+cors_origins = ["http://localhost:5173", "http://127.0.0.1:5173"]
+
+# Optional. Enables historical element sets for past-date propagation.
+# Environment variables SODA_SPACETRACK_USERNAME / SODA_SPACETRACK_PASSWORD take precedence.
+[spacetrack]
+username = ""
+password = ""

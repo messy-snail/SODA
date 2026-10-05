@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" role="img" aria-label="SODA globe favicon"><title>SODA globe favicon</title><g id="globe" transform="translate(16 16) scale(0.160870)">
+<defs><radialGradient id="ocean" cx="76%" cy="18%" r="93%"><stop stop-color="#087FFF"/><stop offset=".49" stop-color="#0751B9"/><stop offset="1" stop-color="#06254F"/></radialGradient></defs>
+<circle r="90" fill="url(#ocean)" stroke="#73CFFF" stroke-width="3"/>
+<g id="graticule" fill="none" stroke="#E4FAFF" stroke-opacity=".8" stroke-width="6"><ellipse cx="0" cy="0" rx="45" ry="88"/><path d="M-88 0H88"/></g>
+<path id="orbit-outline" d="M-79 59C-24 43 60-12 66-72" fill="none" stroke="#007FA9" stroke-width="17" stroke-linecap="round"/>
+<path id="orbit" d="M-79 59C-24 43 60-12 66-72" fill="none" stroke="#76F7FF" stroke-width="10" stroke-linecap="round"/>
+</g></svg>

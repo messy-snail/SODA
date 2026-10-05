@@ -1,0 +1,20 @@
+export default {
+  title: 'GP 데이터 상태',
+  cached: '캐시된 객체',
+  spacetrack: { on: '사용', off: '미설정' },
+  lastOk: '최근 성공',
+  nextAllowed: '다음 요청 가능 {time} UTC',
+  empty: '아직 받은 CelesTrak 그룹 없음',
+  refresh: 'active 그룹 갱신',
+  policy: 'CelesTrak 정책에 따라 같은 그룹은 2시간에 한 번만 요청',
+  result: '결과: {text}',
+  offline: '서버 연결 안 됨',
+  chip: { waiting: 'CelesTrak · 대기 · {count}개', ok: 'CelesTrak · {ago} · {count}개' },
+  fetch: {
+    ok: '수신',
+    not_modified: '변경 없음',
+    not_found: '데이터 없음',
+    error: '오류',
+    skipped: '2시간 규칙으로 건너뜀',
+  },
+}

@@ -1,0 +1,28 @@
+export default {
+  title: '3D models',
+  refresh: 'Refresh model list',
+  show: 'Draw propagated satellites as 3D models',
+  notes: {
+    format: 'Only binary glTF 2.0 ({ext}) is supported. Convert FBX or OBJ in Blender first.',
+    axes: "The model's front (+Z) points along the velocity and its top (+Y) at the zenith. Use the correction angles if its axes differ.",
+    path: 'Files are stored on the server in {path} as {defaultName} or {noradName}. Refresh after dropping one in by hand.',
+    follow: 'Use the follow button on a run, or double-click a satellite, to track it.',
+  },
+  defaultSection: 'Default model',
+  defaultModel: 'Default model',
+  defaultHint: 'Used when a satellite has no model of its own',
+  perSatelliteSection: 'Per-satellite models',
+  perSatelliteHint: 'Pick a satellite in the search card to upload a model just for it.',
+  slot: {
+    replace: 'Replace',
+    upload: 'Upload',
+    openSettings: 'Size and axis correction',
+    closeSettings: 'Close correction',
+    remove: 'Delete model',
+    minimumSize: 'Minimum size (px)',
+    scale: 'Scale',
+    revert: 'Revert',
+    saveSettings: 'Save correction',
+    confirmDelete: 'Delete the {label} file from the server?',
+  },
+}

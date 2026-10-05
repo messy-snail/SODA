@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 0 812 218" width="812" height="218" fill="none" role="img" aria-label="SODA"><title>SODA</title><path id="letter-s" fill="#08244B" d="M174 43H63C28 43 6 65 6 92C6 121 28 139 59 139H105C117 139 123 144 123 152C123 160 117 165 105 165H24L0 204H108C143 204 166 182 166 152C166 121 143 103 111 103H64C53 103 47 98 47 91C47 83 54 79 65 79H145Z"/>
+<path id="letter-d" fill="#08244B" d="M395 43H480C532 43 564 74 564 123C564 174 532 204 480 204H395V101H435V165H478C507 165 522 150 522 123C522 98 507 81 478 81H395Z"/>
+<g id="globe" transform="translate(280 124) scale(0.989130)">
+<defs><radialGradient id="ocean" cx="76%" cy="18%" r="93%"><stop stop-color="#087FFF"/><stop offset=".49" stop-color="#0751B9"/><stop offset="1" stop-color="#06254F"/></radialGradient></defs>
+<circle r="90" fill="url(#ocean)" stroke="#126BD4" stroke-width="1"/>
+<g id="graticule" fill="none" stroke="#C6EBFF" stroke-opacity=".86" stroke-width="1.9"><ellipse cx="0" cy="0" rx="49" ry="90"/><path d="M0-90V90 M-84-34C-49-10 49-10 84-34 M-89 10C-46 30 46 30 89 10 M-70 59C-34 70 34 70 70 59"/></g>
+<path id="orbit-outline" d="M-79 59C-24 43 60-12 66-72" fill="none" stroke="#007FA9" stroke-width="8" stroke-linecap="round"/>
+<path id="orbit" d="M-79 59C-24 43 60-12 66-72" fill="none" stroke="#32EDFF" stroke-width="4.5" stroke-linecap="round"/>
+<circle cx="30" cy="-8" r="6.5" fill="#FFFFFF"/></g><g id="straw-a">
+<path id="letter-a" fill="#08244B" d="M578 204L669 58Q680 41 691 41Q702 41 714 58L806 204H759L691 95L623 204Z"/>
+<path id="soda" fill="#00CEE8" d="M661 190L691 144L721 190Z"/>
+<path id="straw-edge" d="M705 169L739 22L770 10" fill="none" stroke="#08244B" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="straw" d="M705 169L739 22L770 10" fill="none" stroke="#00CEE8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="straw-stripe" d="M729 54L735 56 M723 80L729 82" fill="none" stroke="#08244B" stroke-width="4"/>
+<circle id="bubble-large" cx="766" cy="72" r="5" fill="#00CEE8"/>
+<circle id="bubble-small" cx="784" cy="52" r="3" fill="#00CEE8"/>
+</g></svg>

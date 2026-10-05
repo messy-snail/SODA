@@ -1,0 +1,30 @@
+import { BLUEBON, KOMPSAT_3A, boot, click, expect, hold, play, test, type } from './stage'
+import { openSatelliteStep } from '../tests/rail'
+
+test('orbit', async ({ page, scene }) => {
+  await boot(page)
+  await openSatelliteStep(page, 'pick')
+  const sidebar = page.getByTestId('tool-sidebar')
+  const query = sidebar.getByTestId('satellite-query').locator('input')
+  await page.mouse.move(700, 500)
+  await hold(page, 800)
+
+  await scene.action()
+  await type(page, query, 'BLUEBON')
+  await click(page, sidebar.getByTestId(`satellite-row-${BLUEBON}`))
+  await type(page, query, 'KOMPSAT-3A')
+  await click(page, sidebar.getByTestId(`satellite-row-${KOMPSAT_3A}`))
+  await hold(page, 600)
+  await click(page, sidebar.getByTestId('to-propagate'))
+  await click(page, page.getByText('6 hours', { exact: true }))
+  await click(page, page.getByRole('button', { name: 'Propagate', exact: true }))
+  await expect(page.getByTestId('satellite-step-runs')).toContainText('2')
+  await hold(page, 1200)
+  await play(page, 240)
+  await hold(page, 3500)
+  await click(page, sidebar.getByTestId('run-series').first())
+  const series = page.getByTestId('run-series-dialog')
+  await hold(page, 1500)
+  await click(page, series.getByRole('button', { name: 'Beta angle' }))
+  await hold(page, 2500)
+})

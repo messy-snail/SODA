@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="575 0 235 208" width="235" height="208" fill="none" role="img" aria-label="SODA straw A"><title>SODA straw A</title><g id="straw-a">
+<path id="letter-a" fill="#F1F7FF" d="M578 204L669 58Q680 41 691 41Q702 41 714 58L806 204H759L691 95L623 204Z"/>
+<path id="soda" fill="#52E2F3" d="M661 190L691 144L721 190Z"/>
+<path id="straw-edge" d="M705 169L739 22L770 10" fill="none" stroke="#F1F7FF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="straw" d="M705 169L739 22L770 10" fill="none" stroke="#52E2F3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="straw-stripe" d="M729 54L735 56 M723 80L729 82" fill="none" stroke="#F1F7FF" stroke-width="4"/>
+<circle id="bubble-large" cx="766" cy="72" r="5" fill="#52E2F3"/>
+<circle id="bubble-small" cx="784" cy="52" r="3" fill="#52E2F3"/>
+</g></svg>

@@ -1,0 +1,28 @@
+export default {
+  title: '3D 모델',
+  refresh: '모델 목록 새로고침',
+  show: '전파한 위성을 3D 모델로 표시',
+  notes: {
+    format: 'glTF 2.0 바이너리({ext})만 지원 · FBX·OBJ는 Blender 등에서 변환 필요',
+    axes: '모델의 앞(+Z)이 진행 방향, 위(+Y)가 천정을 향함 · 축이 다르면 보정 각도로 맞춤',
+    path: '파일은 서버의 {path}에 {defaultName}, {noradName}으로 저장됨 · 폴더에 직접 넣었다면 새로고침 필요',
+    follow: '전파 결과의 따라가기 버튼이나 위성 더블클릭으로 카메라가 위성을 따라감',
+  },
+  defaultSection: '공통 기본 모델',
+  defaultModel: '기본 모델',
+  defaultHint: '위성 전용 모델이 없을 때 사용',
+  perSatelliteSection: '위성별 모델',
+  perSatelliteHint: '위성 탐색에서 위성을 고르면 그 위성 전용 모델 업로드 가능',
+  slot: {
+    replace: '교체',
+    upload: '업로드',
+    openSettings: '크기·축 보정',
+    closeSettings: '보정 닫기',
+    remove: '모델 삭제',
+    minimumSize: '최소 크기 (px)',
+    scale: '배율',
+    revert: '되돌리기',
+    saveSettings: '보정 저장',
+    confirmDelete: '{label} 파일을 서버에서 삭제?',
+  },
+}

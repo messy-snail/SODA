@@ -1,0 +1,20 @@
+name: Feature request
+description: Suggest something SODA should show or compute. 한국어로 작성해도 됩니다.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: Describe the analysis or situation first; a proposed solution is welcome but optional.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would help?
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Papers, standards (CCSDS, ...) or tools that define the calculation, if any.

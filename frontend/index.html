@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101820" />
+    <link rel="icon" href="/brand/favicon-32.png" type="image/png" sizes="32x32" />
+    <link
+      rel="icon"
+      href="/brand/favicon-light.svg"
+      type="image/svg+xml"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      href="/brand/favicon-dark.svg"
+      type="image/svg+xml"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
+    <title>SODA · Satellite Orbit Dynamics &amp; Analysis</title>
+    <script>
+      // Resolve the language before the first paint, so the document is tagged for
+      // screen readers and font hinting from the start. Keep in sync with
+      // src/i18n/locale.ts; src/i18n/bootLocale.test.ts asserts the pairing.
+      const LOCALES = ['ko', 'en']
+      let lang = new URLSearchParams(location.search).get('lang')
+      if (!LOCALES.includes(lang)) {
+        try {
+          const stored = localStorage.getItem('soda.locale')
+          lang = LOCALES.includes(stored) ? stored : null
+        } catch {
+          /* Follow the browser when storage is unavailable. */
+        }
+      }
+      document.documentElement.lang = lang ?? (/^ko/i.test(navigator.language || '') ? 'ko' : 'en')
+
+      // Never trap the viewer behind the splash when the app fails to start.
+      if (!/[?&]splash=hold\b/.test(location.search)) {
+        setTimeout(() => document.getElementById('boot')?.remove(), 10000)
+      }
+    </script>
+    <style>
+      html,
+      #boot {
+        background: #101820;
+      }
+      #boot {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        transition: opacity 260ms ease;
+      }
+      #boot img {
+        width: min(440px, 76vw);
+        height: auto;
+      }
+      #boot.is-done {
+        opacity: 0;
+        pointer-events: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="boot" aria-hidden="true">
+      <img src="/brand/primary-dark.svg" width="812" height="252" alt="" />
+    </div>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

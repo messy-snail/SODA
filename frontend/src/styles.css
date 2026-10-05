@@ -1,0 +1,407 @@
+@font-face {
+  font-family: 'Pretendard Variable';
+  src: url('/fonts/PretendardVariable.woff2') format('woff2');
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  font-family: 'Pretendard Variable', 'Malgun Gothic', system-ui, sans-serif;
+  font-synthesis: none;
+  /* Spacing scale for cards and forms; use these rather than new pixel values. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  /* Gap between rows in a form or section body (`.form-stack`). */
+  --stack-gap: var(--space-4);
+}
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+.v-application,
+.v-field,
+.v-overlay-container {
+  font-family: inherit;
+}
+/* Korean wraps at spaces rather than between syllables ("그려 / 요"); only a word too long for
+   its line is broken. Teleported overlays inherit this from the body. */
+body {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+/* Prose avoids a lone word on its last line; short centred text splits into even lines. */
+p,
+li,
+.v-alert__content {
+  text-wrap: pretty;
+}
+.empty-hint,
+.v-tooltip > .v-overlay__content {
+  text-wrap: balance;
+}
+/* Paths and TLE-like strings have no spaces to wrap at. */
+.mono,
+code {
+  overflow-wrap: anywhere;
+}
+.v-btn {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Foldable card headers and sections: the chevron points down while open. */
+.card-heading__toggle {
+  cursor: pointer;
+}
+.fold-button {
+  margin-right: -6px;
+}
+.fold-chevron {
+  transition: transform 160ms;
+}
+.dashboard-card--folded .fold-chevron,
+.fold-section--folded .fold-chevron {
+  transform: rotate(-90deg);
+}
+.dashboard-card--folded > .card-heading {
+  padding-bottom: 14px;
+}
+.fold-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-3);
+}
+.fold-section__head {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+.fold-section__head:hover {
+  color: rgb(var(--v-theme-on-surface));
+}
+.fold-section__head:focus-visible {
+  outline: 2px solid rgb(var(--v-theme-primary));
+}
+.fold-section__summary {
+  overflow: hidden;
+  margin-left: auto;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Cards (spacelab-portal recipe) ------------------------------------------------------ */
+.dashboard-card {
+  flex-shrink: 0;
+  border: 1px solid rgba(var(--v-theme-on-surface), 0.1);
+  border-radius: 14px !important;
+  transition: border-color 160ms;
+}
+.dashboard-card:hover {
+  border-color: rgba(var(--v-theme-primary), 0.45);
+}
+/* A card nested in another (a tab of the view tool) reads as a section of its host. */
+.dashboard-card.dashboard-card--embedded {
+  overflow: visible;
+  background: transparent !important;
+  border: 0;
+  border-bottom: 1px solid rgba(var(--v-theme-on-surface), 0.08);
+  border-radius: 0 !important;
+}
+.dashboard-card--embedded:last-child {
+  border-bottom: 0;
+}
+.dashboard-card--embedded > .card-heading {
+  padding: 12px 0 4px;
+}
+.dashboard-card--embedded .card-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+}
+.dashboard-card.dashboard-card--embedded > .v-card-text {
+  padding: 8px 0 12px;
+}
+.card-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px 4px;
+  white-space: normal;
+}
+.card-heading h2 {
+  font-size: 14px;
+  font-weight: 720;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  margin: 0;
+}
+.card-icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  color: rgb(var(--v-theme-primary));
+  background: rgba(var(--v-theme-primary), 0.1);
+}
+/* Top padding inside the body, not the heading: a scrolling body would clip the floating
+   label of an outlined field that starts the card. */
+.dashboard-card > .v-card-text {
+  padding: 8px 16px 16px;
+}
+.eyebrow {
+  margin: 0 0 2px;
+  font-size: 9.5px;
+  font-weight: 750;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: rgb(var(--v-theme-secondary));
+}
+.muted {
+  color: rgb(var(--v-theme-secondary));
+}
+.form-stack {
+  display: grid;
+  /* Without a bounded column, wide content such as TLE lines widens every row. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--stack-gap);
+}
+.form-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4) var(--space-3);
+}
+/* A button that sits in a field grid matches a compact field's height. */
+.form-action.v-btn {
+  height: 40px;
+}
+/* A mode switch (swath/FOV, point/list): one segmented control across the full width. */
+.segmented.v-btn-group {
+  display: flex;
+  width: 100%;
+  height: 36px;
+  border-radius: 10px;
+}
+.segmented .v-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100% !important;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.section-label {
+  margin: var(--space-1) 0 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgb(var(--v-theme-secondary));
+}
+.notes {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding-left: 16px;
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+/* The list inside an `InfoTip`; a tooltip is teleported, so scoped styles do not reach it. */
+.tip-list {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding-left: 14px;
+  line-height: 1.5;
+}
+/* In a stack, a label sits close to what it names, and a caption close to the row above. */
+.form-stack > .section-label {
+  margin-bottom: calc(var(--space-3) - var(--stack-gap));
+}
+.form-stack > .field-note,
+.form-stack > .notes {
+  margin-top: calc(var(--space-1) - var(--stack-gap));
+}
+.fold-section > .fold-section__head {
+  margin: var(--space-1) 0 0 -2px;
+}
+.notes code {
+  font-size: 11px;
+}
+/** A quiet caption under a field, for caveats that should not read as an alert. */
+.field-note {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: rgb(var(--v-theme-secondary));
+}
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+.stat {
+  padding: 9px 11px;
+  border-radius: 10px;
+  background: rgba(var(--v-theme-on-surface), 0.04);
+}
+/* A value worth a second look, and one that is a problem. */
+.stat--warning {
+  background: rgba(var(--v-theme-warning), 0.22);
+  box-shadow: inset 0 0 0 1px rgba(var(--v-theme-warning), 0.4);
+}
+.stat--warning strong {
+  color: rgb(var(--v-theme-warning));
+}
+.stat--error {
+  background: rgba(var(--v-theme-error), 0.22);
+  box-shadow: inset 0 0 0 1px rgba(var(--v-theme-error), 0.4);
+}
+.stat--error strong {
+  color: rgb(var(--v-theme-error));
+}
+.stat span {
+  display: block;
+  font-size: 10.5px;
+  color: rgb(var(--v-theme-secondary));
+}
+.stat strong {
+  font-size: 16px;
+  font-weight: 720;
+  letter-spacing: -0.3px;
+  font-variant-numeric: tabular-nums;
+}
+.stat small {
+  margin-left: 2px;
+  font-size: 11px;
+  color: rgb(var(--v-theme-secondary));
+}
+.mono {
+  font-family: 'Cascadia Mono', Consolas, monospace;
+  font-size: 11px;
+}
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.list-row:hover {
+  background: rgba(var(--v-theme-primary), 0.06);
+}
+.list-row.selected {
+  border-color: rgba(var(--v-theme-primary), 0.45);
+  background: rgba(var(--v-theme-primary), 0.08);
+}
+.list-row .grow {
+  flex: 1;
+  min-width: 0;
+}
+.list-row strong {
+  display: block;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.list-row small {
+  font-size: 11px;
+  color: rgb(var(--v-theme-secondary));
+  font-variant-numeric: tabular-nums;
+}
+.color-dot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+/* A quiet line where a list or result is still empty. */
+.empty-hint {
+  padding: var(--space-3);
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+  color: rgb(var(--v-theme-secondary));
+}
+
+/* Tooltips: a bordered chip so they read over the globe as well as over cards. */
+.v-tooltip > .v-overlay__content {
+  border: 1px solid rgba(var(--v-theme-on-surface), 0.16);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  font-size: 12px;
+  font-weight: 550;
+  white-space: pre-line;
+}
+
+/*
+ * Slim switches. Vuetify's inset switch is a 52x32 track with a 16 px label, which reads
+ * heavy inside cards; this keeps the inset look at about half the size. The thumb travel
+ * (translateX) follows the track: (32 - 4 - 14) / 2 = 7 px.
+ */
+.v-switch.v-switch--inset .v-switch__track {
+  height: 18px;
+  min-width: 32px;
+  border-radius: 9px;
+}
+.v-switch.v-switch--inset .v-switch__thumb {
+  width: 14px;
+  height: 14px;
+  transform: scale(0.85);
+}
+.v-switch.v-switch--inset .v-selection-control--dirty .v-switch__thumb {
+  transform: none;
+}
+.v-locale--is-ltr .v-switch.v-switch--inset .v-selection-control__input,
+.v-locale--is-ltr.v-switch.v-switch--inset .v-selection-control__input {
+  transform: translateX(-7px);
+}
+.v-locale--is-ltr .v-switch.v-switch--inset .v-selection-control--dirty .v-selection-control__input,
+.v-locale--is-ltr.v-switch.v-switch--inset .v-selection-control--dirty .v-selection-control__input {
+  transform: translateX(7px);
+}
+.v-switch .v-selection-control {
+  min-height: 32px;
+}
+.v-switch .v-selection-control__wrapper {
+  height: 32px;
+}
+.v-switch .v-label {
+  padding-inline-start: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.92;
+}
+/* The off track is otherwise the card's own surface colour and vanishes in dark themes. */
+.v-switch .v-selection-control:not(.v-selection-control--dirty) .v-switch__track {
+  background-color: rgba(var(--v-theme-on-surface), 0.22);
+  opacity: 1;
+}
+/* A run of switches reads as one list rather than separate form rows. */
+.form-stack > .v-switch + .v-switch {
+  margin-top: calc(var(--space-1) - var(--stack-gap));
+}

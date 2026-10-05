@@ -1,0 +1,48 @@
+export default {
+  title: 'Satellite markers',
+  refreshLogos: 'Refresh logo list',
+  shapeSection: 'Shape for propagated satellites',
+  shapes: { point: 'Point', sphere: 'Sphere', cube: 'Cube' },
+  size: 'Size',
+  sizeLabel: 'Shape size (m)',
+  minSize: 'Minimum size',
+  minSizeLabel: 'Minimum shape size (px)',
+  notes: {
+    faces:
+      'A sphere or cube carries the logo on its surface: six faces on a cube, four directions on a sphere. Without a logo it takes the orbit colour.',
+    upload: 'A PNG, JPEG, WebP or SVG is converted to a 512 px PNG and stored in {path}.',
+    fallback:
+      'Without a logo of its own a satellite takes its operator logo, and failing that the default one.',
+    minimumSize:
+      'The marker is never drawn smaller than the minimum size. Double-click a satellite to follow it closely.',
+  },
+  defaultLogoSection: 'Default logo',
+  defaultLogo: 'Default logo',
+  defaultLogoHint: 'Used when a satellite has no logo of its own',
+  operatorSection: 'Operator logos',
+  perSatelliteSection: 'Per-satellite logos',
+  perSatelliteHint: 'Pick a satellite in the search card to upload a logo just for it.',
+  operatorHint: 'Used for every satellite of this operator',
+  foreignToggle: '{action} {count} non-Korean operators',
+  collapse: 'Collapse',
+  expand: 'Show',
+  unknownLogos: 'The server holds {count} logos whose names match no rule:',
+  slot: {
+    builtin: 'Bundled · {size}',
+    replace: 'Replace',
+    upload: 'Upload',
+    revert: 'Restore the bundled logo',
+    remove: 'Delete logo',
+    confirmRevert: 'Restore the bundled logo for {label}?',
+    confirmDelete: 'Delete the {label} file from the server?',
+  },
+  style: {
+    pointSize: 'Point size',
+    opacity: 'Opacity',
+    show: 'Show {category}',
+    changeColor: 'Change {category} colour',
+    themeColor: 'Theme colour',
+    userColor: 'Custom colour',
+    reset: 'Reset point style',
+  },
+}

@@ -1,0 +1,16 @@
+export default {
+  add: '추가',
+  cancel: '취소',
+  close: '닫기',
+  collapse: '{name} 접기',
+  expand: '{name} 펼치기',
+  save: '저장',
+  edit: '수정',
+  remove: '삭제',
+  apply: '적용',
+  none: '없음',
+  added: '추가됨',
+  search: '검색',
+  runSelect: { epoch: 'Epoch {epoch} · {ago}' },
+  noResults: '검색 결과 없음',
+}

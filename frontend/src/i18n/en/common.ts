@@ -1,0 +1,16 @@
+export default {
+  add: 'Add',
+  cancel: 'Cancel',
+  close: 'Close',
+  collapse: 'Collapse {name}',
+  expand: 'Expand {name}',
+  save: 'Save',
+  edit: 'Edit',
+  remove: 'Delete',
+  apply: 'Apply',
+  none: 'None',
+  added: 'Added',
+  search: 'Search',
+  runSelect: { epoch: 'Epoch {epoch} · {ago}' },
+  noResults: 'Nothing matched.',
+}

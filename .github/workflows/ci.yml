@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      # The samples submodule is hundreds of MiB and no test reads it.
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - run: uv sync
+      - run: uv run ruff check src tests
+      - run: uv run ruff format --check src tests
+      # Tests that need the JPL DE421 ephemeris skip themselves when it is absent.
+      - run: uv run pytest -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npx --yes pnpm@10.34.5 --dir frontend install --frozen-lockfile
+      - run: npx --yes pnpm@10.34.5 --dir frontend typecheck
+      - run: npx --yes pnpm@10.34.5 --dir frontend lint
+      - run: npx --yes pnpm@10.34.5 --dir frontend test
+      - run: npx --yes pnpm@10.34.5 --dir frontend build

@@ -1,0 +1,20 @@
+export default {
+  title: 'GP data status',
+  cached: 'Cached objects',
+  spacetrack: { on: 'Enabled', off: 'Not configured' },
+  lastOk: 'last success',
+  nextAllowed: 'Next request allowed {time} UTC',
+  empty: 'No CelesTrak group has been downloaded yet.',
+  refresh: 'Refresh active group',
+  policy: 'CelesTrak policy allows one request per group every two hours.',
+  result: 'Result: {text}',
+  offline: 'Server unreachable',
+  chip: { waiting: 'CelesTrak · waiting · {count}', ok: 'CelesTrak · {ago} · {count}' },
+  fetch: {
+    ok: 'Downloaded',
+    not_modified: 'Not modified',
+    not_found: 'No data',
+    error: 'Error',
+    skipped: 'Skipped by the two-hour rule',
+  },
+}

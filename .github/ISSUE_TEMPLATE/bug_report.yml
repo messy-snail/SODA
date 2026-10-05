@@ -1,0 +1,60 @@
+name: Bug report
+description: Something in SODA does not work as described. 한국어로 작성해도 됩니다.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please **never paste Space-Track credentials or a Cesium ion
+        token**. Security problems belong in a private report instead: see SECURITY.md.
+  - type: input
+    id: version
+    attributes:
+      label: SODA version or commit
+      description: Output of `git rev-parse --short HEAD`.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system and browser
+      placeholder: Windows 11, Edge 140 / macOS 15, Chrome 140
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part?
+      options:
+        - Orbit propagation (SGP4 / HPOP)
+        - Swath
+        - Pass prediction and ground stations
+        - Imaging plan
+        - Storage / power
+        - TC/TM
+        - Imagery
+        - Globe and display
+        - Install, build or server
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened, and what did you expect?
+      description: Screenshots help. For a wrong number, include the satellite (NORAD id), the time span and the value you expected with its source.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the Orbit tool and pick ISS (25544)
+        2. Propagate 1 day at 60 s
+        3. ...
+  - type: textarea
+    id: log
+    attributes:
+      label: Server log or browser console output
+      render: text

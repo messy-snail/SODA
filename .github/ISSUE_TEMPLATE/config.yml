@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/messy-snail/SODA/security/advisories/new
+    about: Problems with file uploads, the imagery downloader or the local server - please report privately, not as a public issue.

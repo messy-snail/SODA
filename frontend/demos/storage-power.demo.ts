@@ -1,0 +1,40 @@
+import { BLUEBON, boot, expect, hold, propagate, test, tool } from './stage'
+import { openTool } from '../tests/rail'
+
+test('storage-power', async ({ page, scene }) => {
+  await boot(page)
+  await propagate(page, [{ key: BLUEBON, query: 'BLUEBON' }], '1 day')
+
+  // A wide area to image and a pass prediction give both tools something to account for.
+  await openTool(page, 'Imaging plan')
+  const access = page.getByTestId('mission-access')
+  await access.getByTestId('aoi-type').click()
+  const form = access.getByTestId('aoi-form')
+  await form.getByRole('button', { name: 'Area', exact: true }).click()
+  await form.getByLabel('West longitude (°)').fill('100')
+  await form.getByLabel('East longitude (°)').fill('150')
+  await form.getByLabel('South latitude (°)').fill('-10')
+  await form.getByLabel('North latitude (°)').fill('45')
+  await form.getByRole('button', { name: 'Add', exact: true }).click()
+  await access.getByTestId('access-compute').click()
+  await expect(access.getByTestId('access-row').first()).toBeVisible()
+  await openTool(page, 'Pass prediction')
+  await page.getByRole('button', { name: 'Predict passes' }).click()
+  await expect(page.locator('.pass-row').first()).toBeVisible()
+  await openTool(page, 'Onboard storage')
+  await page.getByTestId('storage-settings-open').click()
+  await page.getByTestId('storage-settings').getByLabel('Capacity (Gbit)').fill('50000')
+  await page.keyboard.press('Escape')
+  await openTool(page, 'Imaging plan')
+  await page.mouse.move(800, 600)
+  await hold(page, 800)
+
+  await scene.action()
+  await tool(page, 'Onboard storage')
+  await page.mouse.move(820, 620, { steps: 20 })
+  await expect(page.getByTestId('mission-storage').getByTestId('storage-chart')).toBeVisible()
+  await hold(page, 4000)
+  await tool(page, 'Power budget')
+  await page.mouse.move(820, 620, { steps: 20 })
+  await hold(page, 5000)
+})

@@ -1,0 +1,48 @@
+[project]
+name = "soda"
+version = "0.1.0"
+description = "SODA - Satellite Orbit Dynamics & Analysis"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md", "src/soda/assets/logos/LICENSE"]
+authors = [{ name = "hskang" }]
+dependencies = [
+    "fastapi>=0.141.1",
+    "httpx>=0.28.1",
+    "numpy>=2.5.3",
+    "rasterio>=1.5.2",
+    "scipy>=1.18.1",
+    "sgp4>=2.27",
+    "skyfield>=1.55",
+    "uvicorn[standard]>=0.53.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/messy-snail/SODA"
+Issues = "https://github.com/messy-snail/SODA/issues"
+
+[project.scripts]
+soda = "soda.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.11.0,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "SIM", "UP"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.16.7",
+]
